@@ -1,0 +1,15 @@
+{
+  "name": "django-crud",
+  "version": "1.0.0",
+  "description": "simple crud",
+  "scripts": {
+    "serve-api": "cd crudAPI && python manage.py runserver",
+    "serve-client": "cd forum-ui && npm run dev",
+    "serve-all": "concurrently \"npm run serve-api\" \"npm run serve-client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  }
+}
