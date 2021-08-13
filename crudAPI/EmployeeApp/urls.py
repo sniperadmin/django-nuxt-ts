@@ -20,6 +20,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register('departments', views.departmentApi, basename='departments')
 router.register('employees', views.employeeApi, basename='employees')
+router.register('user', views.userviewsets, basename='user')
 
 urlpatterns = [
     path('', include(router.urls)),

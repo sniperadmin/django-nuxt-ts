@@ -5,7 +5,10 @@
   "scripts": {
     "serve-api": "cd crudAPI && python manage.py runserver",
     "serve-client": "cd forum-ui && npm run dev",
-    "serve-all": "concurrently \"npm run serve-api\" \"npm run serve-client\""
+    "serve-all": "concurrently \"npm run serve-api\" \"npm run serve-client\"",
+    "migrate": "cd crudAPI && python manage.py migrate",
+    "add-admin": "cd crudAPI && python manage.py createsuperuser --username nash --email nash@example.com",
+    "add-token": "cd crudAPI && python manage.py drf_create_token nash"
   },
   "author": "",
   "license": "ISC",
