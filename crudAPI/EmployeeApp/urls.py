@@ -17,7 +17,12 @@ from django.urls import path, include
 from rest_framework import routers
 from . import views
 from rest_framework_simplejwt.views import TokenRefreshView
-from EmployeeApp.views import MyTokenPairView, RegisterView
+from EmployeeApp.views import (
+    MyTokenPairView,
+    RegisterView,
+    ChangePasswordView,
+    UpdateProfileView
+)
 
 router = routers.DefaultRouter()
 router.register('departments', views.DepartmentApi, basename='departments')
@@ -28,4 +33,6 @@ urlpatterns = [
     path('login/', MyTokenPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', RegisterView.as_view(), name='register'),
+    path('change-password/<int:pk>/', ChangePasswordView.as_view(), name='change_password'),
+    path('update-profile/<int:pk>/', UpdateProfileView.as_view(), name='update_profile'),
 ]

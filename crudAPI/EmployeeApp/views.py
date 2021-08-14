@@ -9,7 +9,9 @@ from .serializers import (
     DepartmentSerializer,
     EmployeeSerializer,
     MyTokenObtainPairSerializer,
-    RegisterSerializer
+    RegisterSerializer,
+    ChangePasswordSerializer,
+    UpdateUserSerializer
 )
 
 class DepartmentApi(viewsets.ModelViewSet):
@@ -17,7 +19,7 @@ class DepartmentApi(viewsets.ModelViewSet):
     serializer_class = DepartmentSerializer
 
 class EmployeeApi(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
@@ -30,3 +32,13 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
+
+class ChangePasswordView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = ChangePasswordSerializer
+
+class UpdateProfileView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UpdateUserSerializer
