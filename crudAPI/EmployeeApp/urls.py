@@ -18,9 +18,8 @@ from rest_framework import routers
 from . import views
 
 router = routers.DefaultRouter()
-router.register('departments', views.departmentApi, basename='departments')
-router.register('employees', views.employeeApi, basename='employees')
-router.register('user', views.userviewsets, basename='user')
+router.register('departments', views.DepartmentApi, basename='departments')
+router.register('employees', views.EmployeeApi, basename='employees')
 
 urlpatterns = [
     path('', include(router.urls)),
