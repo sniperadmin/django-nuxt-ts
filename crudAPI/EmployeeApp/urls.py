@@ -22,7 +22,8 @@ from EmployeeApp.views import (
     RegisterView,
     ChangePasswordView,
     UpdateProfileView,
-    LogoutView
+    LogoutView,
+    LogoutAllView
 )
 
 router = routers.DefaultRouter()
@@ -37,4 +38,5 @@ urlpatterns = [
     path('change-password/<int:pk>/', ChangePasswordView.as_view(), name='change_password'),
     path('update-profile/<int:pk>/', UpdateProfileView.as_view(), name='update_profile'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('logout-all/', LogoutAllView.as_view(), name='logout_all'),
 ]
