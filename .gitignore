@@ -1,2 +1,7 @@
 node_modules
 forum-ui/node_modules
+crudAPI/**/wolf*.py
+crudAPI/**/__pycache__/
+
+
+.env
