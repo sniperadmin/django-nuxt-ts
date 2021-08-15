@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     # register my own apps (AppName.apps.class)
     'EmployeeApp.apps.EmployeeappConfig'
 ]
@@ -56,7 +57,7 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': os.getenv('SECRET_KEY'),
+    'SIGNING_KEY': 'cvboa##uy87rrd#v9-dntvy&_wyul7f!k%c#(k^82!09$-24up',
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,
@@ -114,18 +115,18 @@ WSGI_APPLICATION = 'crudAPI.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'CLIENT': {
-            "host": "mongodb+srv://nasr:099013090@vue.qynta.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-            "name": "python",
-            "authMechanism": "SCRAM-SHA-1" # for atlas cloud db
-        }
-    }
     # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': 'db.sqlite3'
+    #     'ENGINE': 'djongo',
+    #     'CLIENT': {
+    #         "host": "mongodb+srv://nasr:099013090@vue.qynta.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    #         "name": "python",
+    #         "authMechanism": "SCRAM-SHA-1" # for atlas cloud db
+    #     }
     # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3'
+    }
 }
 
 
