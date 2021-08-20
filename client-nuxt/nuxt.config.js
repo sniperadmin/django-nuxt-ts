@@ -32,6 +32,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/composition-api/module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -45,24 +46,31 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseUrl: 'http://localhost:8000',
+  },
 
   auth: {
     strategies: {
       local: {
+        scheme: 'refresh',
         token: {
-          property: 'token',
+          property: 'access',
+          maxAge: 300,
           global: true,
           // required: true,
           // type: 'Bearer'
         },
-        user: {
-          property: 'user',
-          // autoFetch: true
+        refreshToken: {
+          property: 'refresh',
+          data: 'refresh',
+          maxAge: 24 * 60 * 60,
         },
+        user: false,
         endpoints: {
-          login: { url: '/api/login', method: 'post' },
-          logout: { url: '/api/logout', method: 'post' },
+          login: { url: '/api/login/', method: 'post' },
+          refresh: { url: '/api/login/refresh/', method: 'post' },
+          logout: { url: '/api/logout/', method: 'post' },
           user: false
         },
       },

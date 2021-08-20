@@ -88,15 +88,22 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
+<script lang="ts">
+import { defineComponent, ref, reactive } from '@nuxtjs/composition-api';
+
+export default defineComponent({
+
+  setup() {
+    const clipped = ref(false)
+    const drawer = ref(true)
+    const fixed = ref(false)
+    const miniVariant = ref(false)
+    const right = ref(true)
+    const rightDrawer = ref(false)
+    const title = ref('Vuetify.js')
+
+    const items = reactive([
+      {
           icon: 'mdi-apps',
           title: 'Welcome',
           to: '/'
@@ -105,13 +112,29 @@ export default {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
           to: '/inspire'
+        },
+        {
+          icon: 'mdi-login',
+          title: 'Login',
+          to: '/auth/login'
+        },
+        {
+          icon: 'mdi-account',
+          title: 'Register',
+          to: '/auth/register'
         }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+    ])
+
+    return {
+      clipped,
+      drawer,
+      fixed,
+      miniVariant,
+      right,
+      rightDrawer,
+      title,
+      items
     }
   }
-}
+})
 </script>
