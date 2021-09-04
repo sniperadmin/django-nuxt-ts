@@ -1,8 +1,10 @@
 from rest_framework import viewsets, generics, status
-from rest_framework.views import APIView
+from rest_framework.views import APIView, View
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.decorators import renderer_classes, api_view
+from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken, OutstandingToken, BlacklistedToken
 
@@ -13,8 +15,11 @@ from .serializers import (
     MyTokenObtainPairSerializer,
     RegisterSerializer,
     ChangePasswordSerializer,
-    UpdateUserSerializer
+    UpdateUserSerializer,
+    GetCurrentUserSerializer
 )
+
+from .permissions import IsOwnerOrReadOnly
 
 class DepartmentApi(viewsets.ModelViewSet):
     queryset = Department.objects.all()
@@ -67,3 +72,15 @@ class LogoutAllView(APIView):
             t, _ = BlacklistedToken.objects.get_or_create(token=token)
 
         return Response(status=status.HTTP_205_RESET_CONTENT)
+
+class GetCurrentUserView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
+
+    def get(self, request):
+        user = request.user
+        user_data = User.objects.get(username = user)
+        serializer = GetCurrentUserSerializer(user_data)
+        content = {
+            'user': serializer.data
+        }
+        return Response(content)

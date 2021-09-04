@@ -174,3 +174,16 @@ class UpdateUserSerializer(serializers.ModelSerializer):
     instance.save()
 
     return instance
+
+class GetCurrentUserSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = User
+    fields = ('username', 'first_name', 'last_name', 'email')
+
+  def get(self, instance):
+    user = self.context.get('request').user
+
+    if user.is_authenticated:
+      return instance
+    else:
+      return Response("not auth")

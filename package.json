@@ -4,7 +4,7 @@
   "description": "simple crud",
   "scripts": {
     "serve-api": "cd crudAPI && python manage.py runserver",
-    "serve-client": "cd forum-ui && npm run dev",
+    "serve-client": "cd client-nuxt && npm run dev",
     "serve-all": "concurrently \"npm run serve-api\" \"npm run serve-client\"",
     "migrate": "cd crudAPI && python manage.py migrate",
     "add-admin": "cd crudAPI && python manage.py createsuperuser --username nash --email nash@example.com",
