@@ -73,7 +73,12 @@ class LogoutAllView(APIView):
 
         return Response(status=status.HTTP_205_RESET_CONTENT)
 
-class GetCurrentUserView(generics.RetrieveAPIView):
-    queryset = User.objects.all()
+class GetCurrentUserView(APIView):
     permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
-    serializer_class = GetCurrentUserSerializer
+
+    def get(self, request):
+        user = request.user
+        user_data = User.objects.get(username = user)
+        serializer = GetCurrentUserSerializer(user_data)
+
+        return Response(serializer.data)
