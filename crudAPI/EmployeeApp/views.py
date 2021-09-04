@@ -80,5 +80,7 @@ class GetCurrentUserView(APIView):
         user = request.user
         user_data = User.objects.get(username = user)
         serializer = GetCurrentUserSerializer(user_data)
-
-        return Response(serializer.data)
+        content = {
+            'user': serializer.data
+        }
+        return Response(content)

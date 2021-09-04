@@ -9,7 +9,7 @@
     >
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in filteredItems"
           :key="i"
           :to="item.to"
           router
@@ -20,6 +20,15 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link v-if="$auth.loggedIn" @click="logout">
+          <v-list-item-action>
+            <v-icon>mdi-power-off</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            Logout
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -59,6 +68,9 @@
     </v-app-bar>
     <v-main>
       <v-container>
+        <v-alert :type="$auth.loggedIn ? 'success' : 'error'">
+          Logged in status => {{ $auth.loggedIn }}
+        </v-alert>
         <Nuxt />
       </v-container>
     </v-main>
@@ -89,10 +101,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from '@nuxtjs/composition-api';
+import { defineComponent, ref, reactive, computed, useContext } from '@nuxtjs/composition-api';
 
 export default defineComponent({
-
+  name: 'Default',
   setup() {
     const clipped = ref(false)
     const drawer = ref(true)
@@ -102,28 +114,44 @@ export default defineComponent({
     const rightDrawer = ref(false)
     const title = ref('Vuetify.js')
 
-    const items = reactive([
+    const items = ref([
       {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        },
-        {
-          icon: 'mdi-login',
-          title: 'Login',
-          to: '/auth/login'
-        },
-        {
-          icon: 'mdi-account',
-          title: 'Register',
-          to: '/auth/register'
-        }
+        icon: 'mdi-apps',
+        title: 'Welcome',
+        to: '/',
+        bind: false
+      },
+      {
+        icon: 'mdi-chart-bubble',
+        title: 'Inspire',
+        to: '/inspire',
+        bind: false
+      },
+      {
+        icon: 'mdi-login',
+        title: 'Login',
+        to: '/auth/login',
+        bind: true
+      },
+      {
+        icon: 'mdi-account',
+        title: 'Register',
+        to: '/auth/register',
+        bind: true
+      },
     ])
+
+    const { $auth } = useContext()
+
+    const filteredItems = computed(() => {
+      const meow = items.value.filter(({ bind }) => !bind || (!$auth.loggedIn && bind))
+      console.log(meow);
+      return meow
+    })
+
+    const logout = () => {
+      $auth.logout()
+    }
 
     return {
       clipped,
@@ -133,7 +161,8 @@ export default defineComponent({
       right,
       rightDrawer,
       title,
-      items
+      logout,
+      filteredItems
     }
   }
 })

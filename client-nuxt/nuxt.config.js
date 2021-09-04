@@ -20,6 +20,9 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
+  router: {
+    middleware: ['auth-pages']
+  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
@@ -66,12 +69,14 @@ export default {
           data: 'refresh',
           maxAge: 24 * 60 * 60,
         },
-        user: false,
+        user: {
+          property: 'user',
+        },
         endpoints: {
           login: { url: '/api/login/', method: 'post' },
           refresh: { url: '/api/login/refresh/', method: 'post' },
           logout: { url: '/api/logout/', method: 'post' },
-          user: false
+          user: { url: '/api/get-profile', method: 'get' }
         },
       },
     },

@@ -4,9 +4,6 @@
     v-model="valid"
     lazy-validation
   >
-    {{ isLoggedIn }}
-
-    {{ $auth.strategy.token.get() }}
     <v-text-field
       v-model="name"
       :counter="10"
@@ -94,18 +91,6 @@ export default defineComponent({
             }
           })
 
-          // $auth.setToken('', '' + data.access)
-
-          const parseToken = (token: string) => {
-            return JSON.parse(atob(token.split('.')[1]))
-          }
-
-          const userId = parseToken(data.access).user_id;
-          console.log(userId);
-
-          const user = await $axios.get(`/api/get-profile/${userId}`)
-          console.log(user);
-
         } catch (error) {
           console.log(error);
         }
@@ -124,7 +109,6 @@ export default defineComponent({
       passwordRules,
       validate,
       isLoggedIn,
-      $auth
     }
   }
 })
