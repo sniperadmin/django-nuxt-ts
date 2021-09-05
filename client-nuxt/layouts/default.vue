@@ -31,6 +31,15 @@
             Logout
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item v-if="$auth.loggedIn" to="/profile">
+          <v-list-item-action>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            Profile
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
