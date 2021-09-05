@@ -18,13 +18,12 @@ jobs:
       - uses: afc163/surge-preview@v1
         id: preview_step
         with:
-          working-directory: ./client-nuxt
           surge_token: ${{ secrets.SURGE_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           dist: dist
           teardown: "true"
           build: |
-            ls
+            cd ./client-nuxt
             yarn
             yarn generate
       - name: Get the preview_url
