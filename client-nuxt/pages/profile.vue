@@ -27,7 +27,7 @@
       </v-col>
 
       <v-col>
-        information
+        info and form here
       </v-col>
     </v-row>
   </v-container>

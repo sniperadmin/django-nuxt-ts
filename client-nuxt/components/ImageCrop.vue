@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: Make this component run in a dialog -->
   <v-row align="center" justify="center">
     <v-col cols="7">
       <Cropper
