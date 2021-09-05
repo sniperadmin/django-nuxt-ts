@@ -14,13 +14,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      # - run: cp .env.example .env
       - uses: afc163/surge-preview@v1
         id: preview_step
         with:
           surge_token: ${{ secrets.SURGE_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          dist: dist
+          dist: ./client-nuxt/dist
           teardown: "true"
           build: |
             yarn
