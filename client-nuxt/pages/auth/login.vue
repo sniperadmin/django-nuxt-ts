@@ -82,7 +82,7 @@ export default defineComponent({
     const isLoggedIn = $auth.loggedIn
 
     const validate = async function() {
-      if (context.refs.formRef.validate()) {
+      if ((context.refs.formRef as Vue & { validate: () => boolean }).validate()) {
         try {
           await $auth.loginWith('local', {
             data: {
