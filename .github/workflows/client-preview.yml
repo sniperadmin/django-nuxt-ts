@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: cd into the working directory
-        run: cd ./client-nuxt
+        run: cd client-nuxt
 
       - uses: afc163/surge-preview@v1
         id: preview_step
