@@ -30,6 +30,7 @@ jobs:
           dist: dist
           teardown: "true"
           build: |
+            cd client-nuxt
             ls
 
       - name: Get the preview_url
