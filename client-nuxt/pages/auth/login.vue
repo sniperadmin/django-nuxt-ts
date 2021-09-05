@@ -62,7 +62,7 @@ export default defineComponent({
     const checkbox = ref(false)
     const show = ref(false)
 
-    const { $auth, $axios } = useContext()
+    const { $auth } = useContext()
 
     const nameRules = reactive([
       (v: [boolean, string]) => !!v || 'Name is required!',
@@ -84,7 +84,7 @@ export default defineComponent({
     const validate = async function() {
       if (context.refs.formRef.validate()) {
         try {
-          const { data } = await $auth.loginWith('local', {
+          await $auth.loginWith('local', {
             data: {
               username: name.value,
               password: password.value

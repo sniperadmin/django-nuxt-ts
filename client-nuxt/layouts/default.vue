@@ -23,7 +23,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link v-if="$auth.loggedIn" @click="logout">
+        <v-list-item v-if="$auth.loggedIn" link @click="logout">
           <v-list-item-action>
             <v-icon>mdi-power-off</v-icon>
           </v-list-item-action>
@@ -101,7 +101,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, computed, useContext } from '@nuxtjs/composition-api';
+import { defineComponent, ref, computed, useContext } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'Default',
