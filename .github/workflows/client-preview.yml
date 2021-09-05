@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: cp .env.example .env
+      # - run: cp .env.example .env
       - uses: afc163/surge-preview@v1
         id: preview_step
         with:
