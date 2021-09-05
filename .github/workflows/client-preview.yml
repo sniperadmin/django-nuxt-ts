@@ -15,6 +15,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: cd into the working directory
+        working-directory: ./client-nuxt
+        run: ls
+
       - uses: afc163/surge-preview@v1
         id: preview_step
         with:
@@ -23,7 +28,6 @@ jobs:
           dist: dist
           teardown: "true"
           build: |
-            cd ./client-nuxt
             yarn
             yarn generate
       - name: Get the preview_url
