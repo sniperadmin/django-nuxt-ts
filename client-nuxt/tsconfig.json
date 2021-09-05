@@ -29,6 +29,7 @@
       "@nuxt/content",
       "@types/node",
       "@nuxtjs/auth-next",
+      "jest"
     ]
   },
   "exclude": [
