@@ -27,10 +27,9 @@ jobs:
         with:
           surge_token: ${{ secrets.SURGE_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          dist: dist
+          dist: client-nuxt/dist
           teardown: "true"
           build: |
-            cd client-nuxt
             ls
 
       - name: Get the preview_url
