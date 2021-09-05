@@ -24,7 +24,6 @@ jobs:
           teardown: "true"
           build: |
             yarn
-            yarn build
-            yarn start
+            yarn generate
       - name: Get the preview_url
         run: echo "url => ${{ steps.preview_step.outputs.preview_url }}"
