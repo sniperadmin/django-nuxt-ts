@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath crudAPI crudAPI.wsgi
+web: gunicorn crudAPI.crudAPI.wsgi
