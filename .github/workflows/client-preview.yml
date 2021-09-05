@@ -14,8 +14,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        run: ls
-
       - uses: afc163/surge-preview@v1
         id: preview_step
         with:
@@ -24,6 +22,7 @@ jobs:
           dist: dist
           teardown: "true"
           build: |
+            ls
             yarn
             yarn generate
       - name: Get the preview_url
